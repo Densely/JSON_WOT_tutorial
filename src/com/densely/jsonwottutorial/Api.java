@@ -26,12 +26,12 @@ public class Api {
     public static final String SEARCH_URL = "http://api.worldoftanks.ru/2.0/account/list/?application_id=171745d21f7f98fd8878771da1000a31&search=";
     private RequestQueue mQueue;
     private ArrayList<String> mNames;
-    private OnPlayerSearchListener mListener;
+
     public Api(Context context) {
         mQueue = Volley.newRequestQueue(context);
     }
 
-    public void searchPlayer(String name) {
+    public ArrayList<String> searchPlayer(String name) {
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, SEARCH_URL + name, null, new Response.Listener<JSONObject>() {
@@ -62,13 +62,6 @@ public class Api {
         );
 
         mQueue.add(jsonObjectRequest);
-
+        return mNames;
     }
-
-    public void setOnPlayerChangeListener(OnPlayerSearchListener listener){
-        mListener = listener;
-
-    }
-
-
 }
